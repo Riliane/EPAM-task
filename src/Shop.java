@@ -34,23 +34,21 @@ public class Shop {
             if (goods.isEmpty()) { throw new EmptyException(); }
             in.close();
     }
-    void printAvailableGoods(){
-        if (goods.isEmpty()) {System.out.println("There are no goods in the shop");}
+    void printGoods (Map<SportEquipment, Integer> map){
+        if (rentedGoods.isEmpty()) {System.out.println("No goods");}
         else{
-            System.out.println("Available:");
-            for (HashMap.Entry<SportEquipment, Integer> entry : goods.entrySet()){
+            for (HashMap.Entry<SportEquipment, Integer> entry : map.entrySet()){
                 System.out.println(entry.getKey().toString() + " " + entry.getValue().toString());
             }
         }
     }
+    void printAvailableGoods(){
+        System.out.println("Available:");
+        printGoods(goods);
+    }
     void printRentedGoods(){
-        if (rentedGoods.isEmpty()) {System.out.println("There are no goods currently rented");}
-        else{
-            System.out.println("Rented:");
-            for (HashMap.Entry<SportEquipment, Integer> entry : rentedGoods.entrySet()){
-                System.out.println(entry.getKey().toString() + " " + entry.getValue().toString());
-            }
-        }
+        System.out.println("Rented:");
+        printGoods(rentedGoods);
     }
     void rentGoodsToCustomer(RentUnit customer, String name){
         boolean isFound = false;
